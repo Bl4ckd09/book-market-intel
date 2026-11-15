@@ -1,11 +1,11 @@
 # Book Market Intelligence Pipeline
 
-End-to-end data pipeline demo: **scrape → clean → enrich → report**. Built as
-a work sample; the same pattern delivers product catalogues, price monitoring,
-directory extraction and lead enrichment.
+This end-to-end demo follows **scrape → clean → enrich → report**. As a work
+sample, it illustrates a pattern for product catalogues, price monitoring,
+directory extraction, and lead enrichment.
 
-Target is [books.toscrape.com](https://books.toscrape.com) — a public sandbox
-site built for scraping practice, so the demo is 100% terms-compliant.
+The target is [books.toscrape.com](https://books.toscrape.com), a public
+sandbox built for scraping practice.
 
 ## Pipeline
 
@@ -13,12 +13,19 @@ site built for scraping practice, so the demo is 100% terms-compliant.
 |---|---|---|
 | 1. Scrape | `scrape.py` | `data/books_raw.csv` — 1,000 books, 50 categories |
 | 2. Clean | `clean.py` | `data/books_clean.csv` + `data/market_report.xlsx` + `data/cleaning_report.md` |
-| 3. Enrich | `enrich.py` | `data/books_enriched_sample.csv` — merged with Open Library API |
+| 3. Enrich | `enrich.py` | `data/books_enriched_sample.csv` — top-20 sample enriched via the free Open Library API |
+
+## Project layout
+
+- `scrape.py` — scrapes books into `data/books_raw.csv`.
+- `clean.py` — cleans the data and produces `data/books_clean.csv`, `data/market_report.xlsx`, and `data/cleaning_report.md`.
+- `enrich.py` — calls the free Open Library API for a top-20 sample, producing `data/books_enriched_sample.csv`.
+- `data/` — pipeline outputs: raw and cleaned CSVs, the enriched sample, the Excel report, and the cleaning report.
 
 ## Run it
 
-Requires [uv](https://docs.astral.sh/uv/) only — dependencies are declared
-inline and resolve automatically:
+Uses [uv](https://docs.astral.sh/uv/); dependencies are declared inline and
+resolved automatically:
 
 ```bash
 uv run scrape.py   # ~3 min, polite rate-limiting
